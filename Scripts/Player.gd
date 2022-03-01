@@ -16,6 +16,7 @@ func _physics_process(delta):
 			velocity.x = speed
 		else:
 			velocity.x = speed_reduced
+			
 	# left
 	elif Input.is_action_pressed("ui_left"):
 		if is_on_floor():
@@ -35,11 +36,13 @@ func _physics_process(delta):
 			
 	# down
 	elif Input.is_action_pressed("ui_down"):
+		# fall through one way collisions
 		position.y += 1
 		
 	# basic attack
 	elif Input.is_action_pressed("attack_1"):
 		$AnimatedSprite.play("attack_basic")
+		
 	else:
 		if is_on_floor():
 			$AnimatedSprite.play("idle")
