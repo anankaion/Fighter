@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
-var velocity = Vector2.ZERO
-var gravity = 300
+signal attacking
 
+var gravity = 300
 var speed = 200
 var speed_reduced = 100
 
+var velocity = Vector2.ZERO
 var in_attack = false
 
 func _physics_process(delta):
@@ -48,12 +49,23 @@ func _physics_process(delta):
 			$AnimatedSprite.play("attack_basic")
 			in_attack = true
 			
+			emit_signal("attacking")
+			
+		# if no input
 		else:
+			# when standing play idle
 			if is_on_floor():
 				$AnimatedSprite.play("idle")
+			# if falling play down
 			else:
 				$AnimatedSprite.play("down")
 			velocity.x = 0
+	
+	#if in attack mode
+	#else:
+	#	if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
+	#		$RayCast2D.get_collider().
+	#			
 		
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -61,3 +73,4 @@ func _physics_process(delta):
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
 	in_attack = false
+	$RayCast2D.enabled = false
