@@ -13,15 +13,14 @@ func _physics_process(delta):
 	if not in_attack:
 		# right
 		if Input.is_action_pressed("ui_right"):
-			if $AnimatedSprite.animation != "at":
-				if is_on_floor():
-					$AnimatedSprite.flip_h = false
-					$AnimatedSprite.play("right")
-					
-					velocity.x = speed
-				else:
-					velocity.x = speed_reduced
+			if is_on_floor():
+				$AnimatedSprite.flip_h = false
+				$AnimatedSprite.play("right")
 				
+				velocity.x = speed
+			else:
+				velocity.x = speed_reduced
+			
 		# left
 		elif Input.is_action_pressed("ui_left"):
 			if is_on_floor():
@@ -73,4 +72,3 @@ func _physics_process(delta):
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
 	in_attack = false
-	$RayCast2D.enabled = false
