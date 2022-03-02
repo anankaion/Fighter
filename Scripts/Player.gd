@@ -12,12 +12,12 @@ var velocity = Vector2.ZERO
 var in_attack = false
 
 func _physics_process(delta):
-	if not Input.is_action_pressed("block"):
+	if not Input.is_action_pressed("p1_block"):
 		emit_signal("blocking_ended")
 	
 	if not in_attack:
 		# right
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("p1_right"):
 			if is_on_floor():
 				$AnimatedSprite.flip_h = false
 				$AnimatedSprite.play("right")
@@ -27,7 +27,7 @@ func _physics_process(delta):
 				velocity.x = speed_reduced
 			
 		# left
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed("p1_left"):
 			if is_on_floor():
 				$AnimatedSprite.flip_h = true
 				$AnimatedSprite.play("right")
@@ -37,26 +37,26 @@ func _physics_process(delta):
 				velocity.x = -speed_reduced
 			
 		# up
-		elif Input.is_action_pressed("ui_up"):
+		elif Input.is_action_pressed("p1_up"):
 			$AnimatedSprite.play("jump")
 			
 			if is_on_floor():
 				velocity.y -= 200
 				
 		# down
-		elif Input.is_action_pressed("ui_down"):
+		elif Input.is_action_pressed("p1_down"):
 			# fall through one way collisions
 			position.y += 1
 			
 		# basic attack
-		elif Input.is_action_just_pressed("attack_1"):
+		elif Input.is_action_just_pressed("p1_attack_1"):
 			$AnimatedSprite.play("attack_basic")
 			in_attack = true
 			
 			emit_signal("attacking")
 			
 		# block
-		elif Input.is_action_pressed("block"):
+		elif Input.is_action_pressed("p1_block"):
 			$AnimatedSprite.play("block")
 			emit_signal("blocking_started")
 		
