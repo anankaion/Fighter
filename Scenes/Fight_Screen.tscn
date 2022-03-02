@@ -207,11 +207,25 @@ tile_data = PoolIntArray( 458765, 3, 0, 458768, 3, 0, 589832, 8, 0, 589833, 0, 0
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 73, 123 )
 
+[node name="Player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 111, 123 )
+script = null
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
 limit_left = 0
 limit_top = 0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 68.0
+margin_top = 89.0
+margin_right = 108.0
+margin_bottom = 103.0
+text = "Player 2 Health"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="attacking" from="Player1" to="." method="_on_Player1_attacking"]
 [connection signal="blocking_ended" from="Player1" to="." method="_on_Player1_blocking_ended"]

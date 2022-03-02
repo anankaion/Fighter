@@ -8,8 +8,11 @@ var gravity = 300
 var speed = 200
 var speed_reduced = 100
 
+var raycast_normal = Vector2(30, 0)
+
 var velocity = Vector2.ZERO
 var in_attack = false
+var last_direction = "right"
 
 func _physics_process(delta):
 	if not Input.is_action_pressed("p1_block"):
@@ -26,6 +29,8 @@ func _physics_process(delta):
 			else:
 				velocity.x = speed_reduced
 			
+			last_direction = "right"
+			
 		# left
 		elif Input.is_action_pressed("p1_left"):
 			if is_on_floor():
@@ -35,6 +40,8 @@ func _physics_process(delta):
 				velocity.x = -speed
 			else:
 				velocity.x = -speed_reduced
+			
+			last_direction = "left"
 			
 		# up
 		elif Input.is_action_pressed("p1_up"):
@@ -51,8 +58,13 @@ func _physics_process(delta):
 		# basic attack
 		elif Input.is_action_just_pressed("p1_attack_1"):
 			$AnimatedSprite.play("attack_basic")
-			in_attack = true
 			
+			if last_direction == "right":
+				$RayCast2D.cast_to = raycast_normal
+			else:
+				$RayCast2D.cast_to = Vector2(-raycast_normal.x, raycast_normal.y)
+			
+			in_attack = true
 			emit_signal("attacking")
 			
 		# block

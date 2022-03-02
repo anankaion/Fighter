@@ -6,6 +6,9 @@ var health_player2 = 100
 var damage = 10
 var damage_modifier = 1
 
+func _process(delta):
+	$Label.text = str(health_player2)
+
 func _on_Player1_attacking():
 	$Player1/RayCast2D.enabled = true
 	
