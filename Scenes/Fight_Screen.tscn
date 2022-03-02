@@ -214,3 +214,5 @@ limit_left = 0
 limit_top = 0
 
 [connection signal="attacking" from="Player1" to="." method="_on_Player1_attacking"]
+[connection signal="blocking_ended" from="Player1" to="." method="_on_Player1_blocking_ended"]
+[connection signal="blocking_started" from="Player1" to="." method="_on_Player1_blocking_started"]

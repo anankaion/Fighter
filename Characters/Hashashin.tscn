@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Characters/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png" type="Texture" id=2]
@@ -67,17 +67,17 @@ region = Rect2( 1344, 0, 224, 112 )
 atlas = ExtResource( 2 )
 region = Rect2( 1568, 0, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 336, 224, 112 )
+region = Rect2( 0, 224, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
-region = Rect2( 224, 336, 224, 112 )
+region = Rect2( 224, 224, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 2 )
-region = Rect2( 448, 336, 224, 112 )
+region = Rect2( 448, 224, 224, 112 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 2 )
@@ -107,17 +107,37 @@ region = Rect2( 1120, 560, 224, 112 )
 atlas = ExtResource( 2 )
 region = Rect2( 1344, 560, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 224, 224, 112 )
+region = Rect2( 0, 336, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 2 )
-region = Rect2( 224, 224, 224, 112 )
+region = Rect2( 224, 336, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 2 )
-region = Rect2( 448, 224, 224, 112 )
+region = Rect2( 448, 336, 224, 112 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1008, 224, 112 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 1008, 224, 112 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 1008, 224, 112 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 672, 1008, 224, 112 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 896, 1008, 224, 112 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
@@ -131,9 +151,9 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
-"name": "down",
+"name": "jump",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
@@ -141,10 +161,15 @@ animations = [ {
 "name": "attack_basic",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": true,
-"name": "jump",
+"name": "down",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": false,
+"name": "block",
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -155,8 +180,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
-animation = "attack_basic"
-frame = 5
+animation = "block"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 33 )

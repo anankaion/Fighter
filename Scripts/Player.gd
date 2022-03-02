@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal attacking
+signal blocking_started
+signal blocking_ended
 
 var gravity = 300
 var speed = 200
@@ -10,6 +12,9 @@ var velocity = Vector2.ZERO
 var in_attack = false
 
 func _physics_process(delta):
+	if not Input.is_action_pressed("block"):
+		emit_signal("blocking_ended")
+	
 	if not in_attack:
 		# right
 		if Input.is_action_pressed("ui_right"):
@@ -50,6 +55,11 @@ func _physics_process(delta):
 			
 			emit_signal("attacking")
 			
+		# block
+		elif Input.is_action_pressed("block"):
+			$AnimatedSprite.play("block")
+			emit_signal("blocking_started")
+		
 		# if no input
 		else:
 			# when standing play idle
@@ -60,12 +70,7 @@ func _physics_process(delta):
 				$AnimatedSprite.play("down")
 			velocity.x = 0
 	
-	#if in attack mode
-	#else:
-	#	if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
-	#		$RayCast2D.get_collider().
-	#			
-		
+
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
