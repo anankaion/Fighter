@@ -44,7 +44,7 @@ func _physics_process(delta):
 			position.y += 1
 			
 		# basic attack
-		elif Input.is_action_pressed("attack_1"):
+		elif Input.is_action_just_pressed("attack_1"):
 			$AnimatedSprite.play("attack_basic")
 			in_attack = true
 			
@@ -58,6 +58,6 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-
+# block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
 	in_attack = false

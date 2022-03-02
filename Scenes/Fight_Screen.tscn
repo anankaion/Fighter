@@ -208,3 +208,5 @@ position = Vector2( 73, 123 )
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
+limit_left = 0
+limit_top = 0
