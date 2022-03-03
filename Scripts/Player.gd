@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-signal attacking
+signal attack_hit(attack_type)
 signal blocking_started
 signal blocking_ended
 
@@ -59,13 +59,18 @@ func _physics_process(delta):
 		elif Input.is_action_just_pressed("p1_attack_1"):
 			$AnimatedSprite.play("attack_basic")
 			
+			# set direction of raycast according to last facing side
 			if last_direction == "right":
 				$RayCast2D.cast_to = raycast_normal
 			else:
 				$RayCast2D.cast_to = Vector2(-raycast_normal.x, raycast_normal.y)
+				
+			# get collision
+			$RayCast2D.force_raycast_update()
+			if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
+				emit_signal("attack_hit", "basic")
 			
 			in_attack = true
-			emit_signal("attacking")
 			
 		# block
 		elif Input.is_action_pressed("p1_block"):

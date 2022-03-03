@@ -227,6 +227,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="attacking" from="Player1" to="." method="_on_Player1_attacking"]
+[node name="Label2" type="Label" parent="."]
+margin_left = 177.0
+margin_top = 93.0
+margin_right = 229.0
+margin_bottom = 107.0
+text = "Damage"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="attack_hit" from="Player1" to="." method="_on_Player1_attack_hit"]
 [connection signal="blocking_ended" from="Player1" to="." method="_on_Player1_blocking_ended"]
 [connection signal="blocking_started" from="Player1" to="." method="_on_Player1_blocking_started"]

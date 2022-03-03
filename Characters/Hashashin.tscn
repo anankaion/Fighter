@@ -173,7 +173,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 24.5 )
+extents = Vector2( 10, 19.75 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -183,11 +183,12 @@ frames = SubResource( 10 )
 animation = "block"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 33 )
+position = Vector2( 0, 37.75 )
 shape = SubResource( 1 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 0, 33 )
+enabled = true
 cast_to = Vector2( 30, 0 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
