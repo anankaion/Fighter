@@ -4,6 +4,8 @@ signal attack_hit(attack_type)
 signal blocking_started
 signal blocking_ended
 
+export var player = "p1_"
+
 var gravity = 300
 var speed = 200
 var speed_reduced = 100
@@ -14,13 +16,14 @@ var velocity = Vector2.ZERO
 var in_attack = false
 var last_direction = "right"
 
+
 func _physics_process(delta):
-	if not Input.is_action_pressed("p1_block"):
+	if not Input.is_action_pressed(player + "block"):
 		emit_signal("blocking_ended")
 	
 	if not in_attack:
 		# right
-		if Input.is_action_pressed("p1_right"):
+		if Input.is_action_pressed(player + "right"):
 			if is_on_floor():
 				$AnimatedSprite.flip_h = false
 				$AnimatedSprite.play("right")
@@ -32,7 +35,7 @@ func _physics_process(delta):
 			last_direction = "right"
 			
 		# left
-		elif Input.is_action_pressed("p1_left"):
+		elif Input.is_action_pressed(player + "left"):
 			if is_on_floor():
 				$AnimatedSprite.flip_h = true
 				$AnimatedSprite.play("right")
@@ -44,19 +47,19 @@ func _physics_process(delta):
 			last_direction = "left"
 			
 		# up
-		elif Input.is_action_pressed("p1_up"):
+		elif Input.is_action_pressed(player + "up"):
 			$AnimatedSprite.play("jump")
 			
 			if is_on_floor():
-				velocity.y -= 200
+				velocity.y -= speed
 				
 		# down
-		elif Input.is_action_pressed("p1_down"):
+		elif Input.is_action_pressed(player + "down"):
 			# fall through one way collisions
 			position.y += 1
 			
 		# basic attack
-		elif Input.is_action_just_pressed("p1_attack_1"):
+		elif Input.is_action_just_pressed(player + "attack_1"):
 			$AnimatedSprite.play("attack_basic")
 			
 			# set direction of raycast according to last facing side
@@ -73,7 +76,7 @@ func _physics_process(delta):
 			in_attack = true
 			
 		# block
-		elif Input.is_action_pressed("p1_block"):
+		elif Input.is_action_pressed(player + "block"):
 			$AnimatedSprite.play("block")
 			emit_signal("blocking_started")
 		
