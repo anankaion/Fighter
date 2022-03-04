@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Fonts/Abaddon_Bold.tres" type="DynamicFont" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.0
+margin_left = -0.200001
+margin_top = 0.2
+margin_right = 0.200012
+margin_bottom = -185.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1Container" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 141.0
+margin_right = 171.0
+margin_bottom = 40.0
+
+[node name="Player1_Health" type="Label" parent="HBoxContainer/Player1Container"]
+margin_right = 30.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.368627, 0.866667, 0.247059, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Test"
+
+[node name="Player1_Gauge" type="Label" parent="HBoxContainer/Player1Container"]
+margin_top = 22.0
+margin_right = 30.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0.207843, 0.741176, 1, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Test"
+
+[node name="Player2Container" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 175.0
+margin_right = 205.0
+margin_bottom = 40.0
+
+[node name="Player2_Health" type="Label" parent="HBoxContainer/Player2Container"]
+margin_right = 30.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.368627, 0.866667, 0.247059, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Test"
+
+[node name="Player2_Gauge" type="Label" parent="HBoxContainer/Player2Container"]
+margin_top = 22.0
+margin_right = 30.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0.207843, 0.741176, 1, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Test"
