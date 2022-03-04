@@ -4,7 +4,7 @@ signal attack_hit(attack_type)
 signal blocking_started
 signal blocking_ended
 
-export var player = "p1_"
+export var player_name : String
 
 var gravity = 300
 var speed = 200
@@ -18,12 +18,12 @@ var last_direction = "right"
 
 
 func _physics_process(delta):
-	if not Input.is_action_pressed(player + "block"):
+	if not Input.is_action_pressed(player_name + "block"):
 		emit_signal("blocking_ended")
 	
 	if not in_attack:
 		# right
-		if Input.is_action_pressed(player + "right"):
+		if Input.is_action_pressed(player_name + "right"):
 			if is_on_floor():
 				$AnimatedSprite.flip_h = false
 				$AnimatedSprite.play("right")
@@ -35,7 +35,7 @@ func _physics_process(delta):
 			last_direction = "right"
 			
 		# left
-		elif Input.is_action_pressed(player + "left"):
+		elif Input.is_action_pressed(player_name + "left"):
 			if is_on_floor():
 				$AnimatedSprite.flip_h = true
 				$AnimatedSprite.play("right")
@@ -47,19 +47,19 @@ func _physics_process(delta):
 			last_direction = "left"
 			
 		# up
-		elif Input.is_action_pressed(player + "up"):
+		elif Input.is_action_pressed(player_name + "up"):
 			$AnimatedSprite.play("jump")
 			
 			if is_on_floor():
 				velocity.y -= speed
 				
 		# down
-		elif Input.is_action_pressed(player + "down"):
+		elif Input.is_action_pressed(player_name + "down"):
 			# fall through one way collisions
 			position.y += 1
 			
 		# basic attack
-		elif Input.is_action_just_pressed(player + "attack_1"):
+		elif Input.is_action_just_pressed(player_name + "attack_1"):
 			$AnimatedSprite.play("attack_basic")
 			
 			# set direction of raycast according to last facing side
@@ -76,7 +76,7 @@ func _physics_process(delta):
 			in_attack = true
 			
 		# block
-		elif Input.is_action_pressed(player + "block"):
+		elif Input.is_action_pressed(player_name + "block"):
 			$AnimatedSprite.play("block")
 			emit_signal("blocking_started")
 		
@@ -93,7 +93,19 @@ func _physics_process(delta):
 
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+func die():
+	in_attack = true
+	$AnimatedSprite.play("die")
 
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
 	in_attack = false
+
+
+func _on_Node2D_p2_dying():
+	die()
+
+
+func _on_Node2D_p1_dying():
+	die()
