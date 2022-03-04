@@ -8,6 +8,9 @@ signal p2_gauge_changed
 signal p1_dying
 signal p2_dying
 
+signal p1_hit
+signal p2_hit
+
 var p1_health = 100
 var p2_health = 100
 var p1_gauge = 0
@@ -50,8 +53,11 @@ func _on_Player1_attack_hit(attack_type):
 	if attack_type == "basic":
 		p2_health -= damage * p2_damage_modifier
 		p1_gauge += 5
-		emit_signal("p2_health_changed")
-		emit_signal("p1_gauge_changed")
+	
+	emit_signal("p2_hit")
+	
+	emit_signal("p2_health_changed")
+	emit_signal("p1_gauge_changed")
 
 
 func _on_Node2D_p1_gauge_changed():

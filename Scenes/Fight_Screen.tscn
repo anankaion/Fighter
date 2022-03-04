@@ -245,6 +245,7 @@ __meta__ = {
 [connection signal="p2_dying" from="." to="Player2" method="_on_Node2D_p2_dying"]
 [connection signal="p2_gauge_changed" from="." to="." method="_on_Node2D_p2_gauge_changed"]
 [connection signal="p2_health_changed" from="." to="." method="_on_Node2D_p2_health_changed"]
+[connection signal="p2_hit" from="." to="Player2" method="_on_Node2D_p2_hit"]
 [connection signal="attack_hit" from="Player1" to="." method="_on_Player1_attack_hit"]
 [connection signal="blocking_ended" from="Player1" to="." method="_on_Player1_blocking_ended"]
 [connection signal="blocking_started" from="Player1" to="." method="_on_Player1_blocking_started"]

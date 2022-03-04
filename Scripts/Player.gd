@@ -13,7 +13,7 @@ var speed_reduced = 100
 var raycast_normal = Vector2(30, 0)
 
 var velocity = Vector2.ZERO
-var in_attack = false
+var block_input = false
 var last_direction = "right"
 
 
@@ -21,7 +21,7 @@ func _physics_process(delta):
 	if not Input.is_action_pressed(player_name + "block"):
 		emit_signal("blocking_ended")
 	
-	if not in_attack:
+	if not block_input:
 		# right
 		if Input.is_action_pressed(player_name + "right"):
 			if is_on_floor():
@@ -73,7 +73,7 @@ func _physics_process(delta):
 			if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
 				emit_signal("attack_hit", "basic")
 			
-			in_attack = true
+			block_input = true
 			
 		# block
 		elif Input.is_action_pressed(player_name + "block"):
@@ -95,12 +95,12 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func die():
-	in_attack = true
+	block_input = true
 	$AnimatedSprite.play("die")
 
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
-	in_attack = false
+	block_input = false
 
 
 func _on_Node2D_p2_dying():
@@ -109,3 +109,8 @@ func _on_Node2D_p2_dying():
 
 func _on_Node2D_p1_dying():
 	die()
+
+
+func _on_Node2D_p2_hit():
+	block_input = true
+	$AnimatedSprite.play("get_hit")
