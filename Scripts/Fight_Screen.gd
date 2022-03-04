@@ -41,24 +41,42 @@ func check_win():
 		$Camera2D/Win_Label.text = "Player 2 wins!"
 		$Camera2D/Win_Label.visible = true
 	
+
+func attack(attack_type):
+	if attack_type == "basic":
+		p2_health -= damage * p2_damage_modifier
+		p1_gauge += 5
+
 func _on_Player1_blocking_started():
 	p1_damage_modifier = 0.1
 
 
 func _on_Player1_blocking_ended():
 	p1_damage_modifier = 1
+	
+	
+func _on_Player2_blocking_started():
+	p2_damage_modifier = 0.1
+	
+func _on_Player2_blocking_ended():
+	p2_damage_modifier = 1
 
 
 func _on_Player1_attack_hit(attack_type):
-	if attack_type == "basic":
-		p2_health -= damage * p2_damage_modifier
-		p1_gauge += 5
+	attack(attack_type)
 	
 	emit_signal("p2_hit")
 	
 	emit_signal("p2_health_changed")
 	emit_signal("p1_gauge_changed")
 
+func _on_Player2_attack_hit(attack_type):
+	attack(attack_type)
+	
+	emit_signal("p1_hit")
+	
+	emit_signal("p1_health_changed")
+	emit_signal("p2_gauge_changed")
 
 func _on_Node2D_p1_gauge_changed():
 	$Camera2D/HUD/HBoxContainer/Player1Container/Player1_Gauge.text = str(p1_gauge)

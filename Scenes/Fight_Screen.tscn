@@ -249,3 +249,6 @@ __meta__ = {
 [connection signal="attack_hit" from="Player1" to="." method="_on_Player1_attack_hit"]
 [connection signal="blocking_ended" from="Player1" to="." method="_on_Player1_blocking_ended"]
 [connection signal="blocking_started" from="Player1" to="." method="_on_Player1_blocking_started"]
+[connection signal="attack_hit" from="Player2" to="." method="_on_Player2_attack_hit"]
+[connection signal="blocking_ended" from="Player2" to="." method="_on_Player2_blocking_ended"]
+[connection signal="blocking_started" from="Player2" to="." method="_on_Player2_blocking_started"]
