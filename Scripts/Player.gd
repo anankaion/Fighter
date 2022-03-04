@@ -130,3 +130,8 @@ func _on_Node2D_p1_dying():
 func _on_Node2D_p2_hit():
 	block_input = true
 	$AnimatedSprite.play("get_hit")
+
+
+func _on_Node2D_p1_hit():
+	block_input = true
+	$AnimatedSprite.play("get_hit")

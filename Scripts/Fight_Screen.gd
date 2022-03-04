@@ -40,12 +40,7 @@ func check_win():
 		emit_signal("p1_dying")
 		$Camera2D/Win_Label.text = "Player 2 wins!"
 		$Camera2D/Win_Label.visible = true
-	
 
-func attack(attack_type):
-	if attack_type == "basic":
-		p2_health -= damage * p2_damage_modifier
-		p1_gauge += 5
 
 func _on_Player1_blocking_started():
 	p1_damage_modifier = 0.1
@@ -63,7 +58,9 @@ func _on_Player2_blocking_ended():
 
 
 func _on_Player1_attack_hit(attack_type):
-	attack(attack_type)
+	if attack_type == "basic":
+		p2_health -= damage * p2_damage_modifier
+		p1_gauge += 5
 	
 	emit_signal("p2_hit")
 	
@@ -71,7 +68,9 @@ func _on_Player1_attack_hit(attack_type):
 	emit_signal("p1_gauge_changed")
 
 func _on_Player2_attack_hit(attack_type):
-	attack(attack_type)
+	if attack_type == "basic":
+		p1_health -= damage * p1_damage_modifier
+		p2_gauge += 5
 	
 	emit_signal("p1_hit")
 	
