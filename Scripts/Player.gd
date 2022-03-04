@@ -11,6 +11,7 @@ var speed = 200
 var speed_reduced = 100
 
 var raycast_normal = Vector2(30, 0)
+var raycast_huge = Vector2(100, 0)
 
 var velocity = Vector2.ZERO
 var block_input = false
@@ -61,18 +62,13 @@ func _physics_process(delta):
 		# basic attack
 		elif Input.is_action_just_pressed(player_name + "attack_1"):
 			$AnimatedSprite.play("attack_basic")
+			attack("basic")
+			block_input = true
 			
-			# set direction of raycast according to last facing side
-			if last_direction == "right":
-				$RayCast2D.cast_to = raycast_normal
-			else:
-				$RayCast2D.cast_to = Vector2(-raycast_normal.x, raycast_normal.y)
-				
-			# get collision
-			$RayCast2D.force_raycast_update()
-			if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
-				emit_signal("attack_hit", "basic")
-			
+		# gauge attack
+		elif Input.is_action_just_pressed(player_name + "attack_2"):
+			$AnimatedSprite.play("attack_g1")
+			attack("g1")
 			block_input = true
 			
 		# block
@@ -97,6 +93,26 @@ func _physics_process(delta):
 func die():
 	block_input = true
 	$AnimatedSprite.play("die")
+	
+
+func attack(attack_type):
+	var raycast
+	
+	if attack_type == "basic":
+		raycast = raycast_normal
+	elif attack_type == "g1":
+		raycast = raycast_huge
+	
+	# set direction of raycast according to last facing side
+	if last_direction == "right":
+		$RayCast2D.cast_to = raycast
+	else:
+		$RayCast2D.cast_to = Vector2(-raycast.x, raycast.y)
+		
+	# get collision
+	$RayCast2D.force_raycast_update()
+	if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
+		emit_signal("attack_hit", attack_type)
 
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():

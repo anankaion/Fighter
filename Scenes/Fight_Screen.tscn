@@ -203,14 +203,14 @@ tile_data = PoolIntArray( 0, 0, 0, 10, 1, 0, 18, 0, 0, 28, 3, 0, 786443, 5, 0, 7
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 458765, 3, 0, 458768, 3, 0, 589832, 8, 0, 589833, 0, 0, 589844, 0, 0, 720896, 2, 0, 720899, 2, 0, 720902, 2, 0, 720918, 2, 0, 720921, 2, 0, 720924, 2, 0 )
+tile_data = PoolIntArray( 458765, 3, 0, 458772, 3, 0, 589832, 8, 0, 720896, 2, 0, 720899, 2, 0, 720902, 2, 0, 720905, 2, 0, 720908, 2, 0, 720911, 2, 0, 720914, 2, 0, 720917, 2, 0, 720920, 2, 0, 720923, 2, 0, 720926, 2, 0 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 73, 123 )
 player_name = "p1_"
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 111, 123 )
+position = Vector2( 328, 122 )
 player_name = "p2_"
 
 [node name="Camera2D" type="Camera2D" parent="."]
