@@ -86,6 +86,7 @@ func _physics_process(delta):
 				attack("g1")
 				block_input = true
 				gauge -= 15
+				damage_modifier = 0
 				emit_signal("gauge_changed", gauge)
 				
 		# block
@@ -149,6 +150,8 @@ func _on_AnimatedSprite_animation_finished():
 	
 	if $AnimatedSprite.animation == "die":
 		emit_signal("death_animation_finished")
+	elif $AnimatedSprite.animation == "attack_g1":
+		damage_modifier = 1
 
 func _on_Player1_attack_hit(damage):
 	get_damage(damage)
