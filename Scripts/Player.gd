@@ -4,9 +4,14 @@ export var player_name : String
 
 signal attack_hit(damage)
 signal health_changed(health)
+signal gauge_changed(gauge)
+signal death
 
-var health = 100
+export var health = 100
 var gauge = 0
+
+var damage = 10
+var damage_modifier = 1
 
 var gravity = 300
 var speed = 200
@@ -20,10 +25,14 @@ var block_input = false
 var last_direction = "right"
 
 
+func _ready():
+	# to update fight screen at beginning
+	emit_signal("health_changed", health)
+	emit_signal("gauge_changed", gauge)
+
+
 func _physics_process(delta):
-	if not Input.is_action_pressed(player_name + "block"):
-		pass
-	
+		
 	if not block_input:
 		# right
 		if Input.is_action_pressed(player_name + "right"):
@@ -76,6 +85,7 @@ func _physics_process(delta):
 		# block
 		elif Input.is_action_pressed(player_name + "block"):
 			$AnimatedSprite.play("block")
+			damage_modifier = 0.1
 		
 		# if no input
 		else:
@@ -111,7 +121,18 @@ func attack(attack_type):
 	if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
 		gauge += 5
 		emit_signal("attack_hit", 5)
+		emit_signal("gauge_changed", gauge)
 		
+		
+func get_damage(damage):
+	health -= damage * damage_modifier
+	emit_signal("health_changed", health)
+	
+	# check win condition
+	if health <= 0:
+		$AnimatedSprite.play("die")
+		block_input = true
+		emit_signal("death")
 
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
@@ -119,5 +140,7 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_Player1_attack_hit(damage):
-	health -= damage
-	emit_signal("health_changed", health)
+	get_damage(damage)
+
+func _on_Player2_attack_hit(damage):
+	get_damage(damage)

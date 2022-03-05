@@ -190,7 +190,7 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 4, 32, 4 )
 } ]
 3/z_index = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="FightScreen" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="Background" type="TileMap" parent="."]
@@ -212,6 +212,7 @@ player_name = "p1_"
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 328, 122 )
 player_name = "p2_"
+health = 10
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -240,5 +241,10 @@ __meta__ = {
 }
 
 [connection signal="attack_hit" from="Player1" to="Player2" method="_on_Player1_attack_hit"]
+[connection signal="death" from="Player1" to="." method="_on_Player1_death"]
+[connection signal="gauge_changed" from="Player1" to="." method="_on_Player1_gauge_changed"]
 [connection signal="health_changed" from="Player1" to="." method="_on_Player1_health_changed"]
+[connection signal="attack_hit" from="Player2" to="Player1" method="_on_Player2_attack_hit"]
+[connection signal="death" from="Player2" to="." method="_on_Player2_death"]
+[connection signal="gauge_changed" from="Player2" to="." method="_on_Player2_gauge_changed"]
 [connection signal="health_changed" from="Player2" to="." method="_on_Player2_health_changed"]
