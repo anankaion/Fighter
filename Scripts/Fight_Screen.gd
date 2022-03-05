@@ -19,10 +19,18 @@ func _on_Player2_gauge_changed(gauge):
 
 
 func _on_Player1_death():
-	$Camera2D/Win_Label.text = "Player 1 wins!"
+	$Camera2D/Win_Label.text = "Player 2 wins!"
 	$Camera2D/Win_Label.visible = true
 
 
 func _on_Player2_death():
-	$Camera2D/Win_Label.text = "Player 2 wins!"
+	$Camera2D/Win_Label.text = "Player 1 wins!"
 	$Camera2D/Win_Label.visible = true
+
+
+func _on_Player1_death_animation_finished():
+	$Player1.queue_free()
+	
+
+func _on_Player2_death_animation_finished():
+	$Player2.queue_free()

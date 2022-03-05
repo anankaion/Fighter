@@ -5,7 +5,9 @@ export var player_name : String
 signal attack_hit(damage)
 signal health_changed(health)
 signal gauge_changed(gauge)
+
 signal death
+signal death_animation_finished
 
 export var health = 100
 var gauge = 0
@@ -137,7 +139,9 @@ func get_damage(damage):
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
 	block_input = false
-
+	
+	if $AnimatedSprite.animation == "die":
+		emit_signal("death_animation_finished")
 
 func _on_Player1_attack_hit(damage):
 	get_damage(damage)

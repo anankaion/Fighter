@@ -208,6 +208,7 @@ tile_data = PoolIntArray( 458765, 3, 0, 458772, 3, 0, 589832, 8, 0, 720896, 2, 0
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 73, 123 )
 player_name = "p1_"
+health = 10
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 328, 122 )
@@ -242,9 +243,11 @@ __meta__ = {
 
 [connection signal="attack_hit" from="Player1" to="Player2" method="_on_Player1_attack_hit"]
 [connection signal="death" from="Player1" to="." method="_on_Player1_death"]
+[connection signal="death_animation_finished" from="Player1" to="." method="_on_Player1_death_animation_finished"]
 [connection signal="gauge_changed" from="Player1" to="." method="_on_Player1_gauge_changed"]
 [connection signal="health_changed" from="Player1" to="." method="_on_Player1_health_changed"]
 [connection signal="attack_hit" from="Player2" to="Player1" method="_on_Player2_attack_hit"]
 [connection signal="death" from="Player2" to="." method="_on_Player2_death"]
+[connection signal="death_animation_finished" from="Player2" to="." method="_on_Player2_death_animation_finished"]
 [connection signal="gauge_changed" from="Player2" to="." method="_on_Player2_gauge_changed"]
 [connection signal="health_changed" from="Player2" to="." method="_on_Player2_health_changed"]
