@@ -214,6 +214,7 @@ gauge = 20
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 328, 122 )
 player_name = "p2_"
+health = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

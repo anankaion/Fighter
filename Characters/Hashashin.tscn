@@ -67,13 +67,13 @@ region = Rect2( 1344, 0, 224, 112 )
 atlas = ExtResource( 2 )
 region = Rect2( 1568, 0, 224, 112 )
 
-[sub_resource type="AtlasTexture" id=57]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 1120, 224, 112 )
-
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 2 )
 region = Rect2( 224, 1120, 224, 112 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1120, 224, 112 )
 
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 2 )
@@ -375,7 +375,7 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
+"frames": [ SubResource( 58 ), SubResource( 57 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
 "loop": true,
 "name": "get_hit",
 "speed": 15.0
@@ -430,4 +430,5 @@ position = Vector2( 0, 33 )
 enabled = true
 cast_to = Vector2( 30, 0 )
 
+[connection signal="death" from="." to="." method="_on_KinematicBody2D_death"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

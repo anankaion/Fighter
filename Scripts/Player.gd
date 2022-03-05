@@ -26,6 +26,7 @@ var raycast_huge = Vector2(100, 0)
 var velocity = Vector2.ZERO
 var block_input = false
 var last_direction = "right"
+var dying = false
 
 
 func _ready():
@@ -78,6 +79,7 @@ func _physics_process(delta):
 			$AnimatedSprite.play("attack_basic")
 			attack("basic")
 			block_input = true
+			print(block_input)
 			
 		# gauge attack
 		elif Input.is_action_just_pressed(player_name + "attack_2"):
@@ -104,7 +106,6 @@ func _physics_process(delta):
 				$AnimatedSprite.play("down")
 			velocity.x = 0
 	
-
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
@@ -133,16 +134,18 @@ func attack(attack_type):
 		elif attack_type == "g1":
 			emit_signal("attack_hit", damage_normal * 5)
 		
-		
-func get_damage(damage):
-	health -= damage * damage_modifier
-	emit_signal("health_changed", health)
-	
+func check_win():
 	# check win condition
 	if health <= 0:
 		$AnimatedSprite.play("die")
 		block_input = true
 		emit_signal("death")
+		
+func get_damage(damage):
+	health -= damage * damage_modifier
+	emit_signal("health_changed", health)
+	
+	check_win()
 
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
@@ -153,8 +156,19 @@ func _on_AnimatedSprite_animation_finished():
 	elif $AnimatedSprite.animation == "attack_g1":
 		damage_modifier = 1
 
-func _on_Player1_attack_hit(damage):
+func take_hit(damage):
 	get_damage(damage)
+	
+	block_input = true
+	if not dying:
+		$AnimatedSprite.play("get_hit")
+
+func _on_Player1_attack_hit(damage):
+	take_hit(damage)
 
 func _on_Player2_attack_hit(damage):
-	get_damage(damage)
+	take_hit(damage)
+
+
+func _on_KinematicBody2D_death():
+	dying = true
