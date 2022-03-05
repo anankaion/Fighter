@@ -209,11 +209,11 @@ tile_data = PoolIntArray( 458765, 3, 0, 458772, 3, 0, 589832, 8, 0, 720896, 2, 0
 position = Vector2( 73, 123 )
 player_name = "p1_"
 health = 10
+gauge = 20
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 328, 122 )
 player_name = "p2_"
-health = 10
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

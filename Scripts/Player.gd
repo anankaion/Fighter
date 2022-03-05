@@ -10,10 +10,11 @@ signal death
 signal death_animation_finished
 
 export var health = 100
-var gauge = 0
+export var gauge = 0
 
-var damage = 10
+var damage_normal = 10
 var damage_modifier = 1
+var gauge_increase = 5
 
 var gravity = 300
 var speed = 200
@@ -80,10 +81,13 @@ func _physics_process(delta):
 			
 		# gauge attack
 		elif Input.is_action_just_pressed(player_name + "attack_2"):
-			$AnimatedSprite.play("attack_g1")
-			attack("g1")
-			block_input = true
-			
+			if gauge >= 15:
+				$AnimatedSprite.play("attack_g1")
+				attack("g1")
+				block_input = true
+				gauge -= 15
+				emit_signal("gauge_changed", gauge)
+				
 		# block
 		elif Input.is_action_pressed(player_name + "block"):
 			$AnimatedSprite.play("block")
@@ -121,9 +125,12 @@ func attack(attack_type):
 	# get collision
 	$RayCast2D.force_raycast_update()
 	if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
-		gauge += 5
-		emit_signal("attack_hit", 5)
-		emit_signal("gauge_changed", gauge)
+		if attack_type == "basic":
+			gauge += gauge_increase
+			emit_signal("attack_hit", damage_normal)
+			emit_signal("gauge_changed", gauge)
+		elif attack_type == "g1":
+			emit_signal("attack_hit", damage_normal * 5)
 		
 		
 func get_damage(damage):
