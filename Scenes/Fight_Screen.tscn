@@ -239,17 +239,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="p1_dying" from="." to="Player1" method="_on_Node2D_p1_dying"]
-[connection signal="p1_gauge_changed" from="." to="." method="_on_Node2D_p1_gauge_changed"]
-[connection signal="p1_health_changed" from="." to="." method="_on_Node2D_p1_health_changed"]
-[connection signal="p1_hit" from="." to="Player1" method="_on_Node2D_p1_hit"]
-[connection signal="p2_dying" from="." to="Player2" method="_on_Node2D_p2_dying"]
-[connection signal="p2_gauge_changed" from="." to="." method="_on_Node2D_p2_gauge_changed"]
-[connection signal="p2_health_changed" from="." to="." method="_on_Node2D_p2_health_changed"]
-[connection signal="p2_hit" from="." to="Player2" method="_on_Node2D_p2_hit"]
-[connection signal="attack_hit" from="Player1" to="." method="_on_Player1_attack_hit"]
-[connection signal="blocking_ended" from="Player1" to="." method="_on_Player1_blocking_ended"]
-[connection signal="blocking_started" from="Player1" to="." method="_on_Player1_blocking_started"]
-[connection signal="attack_hit" from="Player2" to="." method="_on_Player2_attack_hit"]
-[connection signal="blocking_ended" from="Player2" to="." method="_on_Player2_blocking_ended"]
-[connection signal="blocking_started" from="Player2" to="." method="_on_Player2_blocking_started"]
+[connection signal="attack_hit" from="Player1" to="Player2" method="_on_Player1_attack_hit"]
+[connection signal="health_changed" from="Player1" to="." method="_on_Player1_health_changed"]
+[connection signal="health_changed" from="Player2" to="." method="_on_Player2_health_changed"]

@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
-signal attack_hit(attack_type)
-signal blocking_started
-signal blocking_ended
-
 export var player_name : String
+
+signal attack_hit(damage)
+signal health_changed(health)
+
+var health = 100
+var gauge = 0
 
 var gravity = 300
 var speed = 200
@@ -20,7 +22,7 @@ var last_direction = "right"
 
 func _physics_process(delta):
 	if not Input.is_action_pressed(player_name + "block"):
-		emit_signal("blocking_ended")
+		pass
 	
 	if not block_input:
 		# right
@@ -74,7 +76,6 @@ func _physics_process(delta):
 		# block
 		elif Input.is_action_pressed(player_name + "block"):
 			$AnimatedSprite.play("block")
-			emit_signal("blocking_started")
 		
 		# if no input
 		else:
@@ -89,10 +90,6 @@ func _physics_process(delta):
 
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
-func die():
-	block_input = true
-	$AnimatedSprite.play("die")
 	
 
 func attack(attack_type):
@@ -112,26 +109,15 @@ func attack(attack_type):
 	# get collision
 	$RayCast2D.force_raycast_update()
 	if $RayCast2D.is_colliding() and $RayCast2D.get_collider() is KinematicBody2D:
-		emit_signal("attack_hit", attack_type)
+		gauge += 5
+		emit_signal("attack_hit", 5)
+		
 
 # block input until attack is finished
 func _on_AnimatedSprite_animation_finished():
 	block_input = false
 
 
-func _on_Node2D_p2_dying():
-	die()
-
-
-func _on_Node2D_p1_dying():
-	die()
-
-
-func _on_Node2D_p2_hit():
-	block_input = true
-	$AnimatedSprite.play("get_hit")
-
-
-func _on_Node2D_p1_hit():
-	block_input = true
-	$AnimatedSprite.play("get_hit")
+func _on_Player1_attack_hit(damage):
+	health -= damage
+	emit_signal("health_changed", health)
