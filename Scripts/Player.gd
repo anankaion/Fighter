@@ -79,7 +79,6 @@ func _physics_process(delta):
 			$AnimatedSprite.play("attack_basic")
 			attack("basic")
 			block_input = true
-			print(block_input)
 			
 		# gauge attack
 		elif Input.is_action_just_pressed(player_name + "attack_2"):
@@ -132,7 +131,7 @@ func attack(attack_type):
 			emit_signal("attack_hit", damage_normal)
 			emit_signal("gauge_changed", gauge)
 		elif attack_type == "g1":
-			emit_signal("attack_hit", damage_normal * 5)
+			emit_signal("attack_hit", damage_normal * 2)
 		
 func check_win():
 	# check win condition
