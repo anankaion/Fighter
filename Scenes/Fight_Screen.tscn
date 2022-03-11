@@ -208,13 +208,10 @@ tile_data = PoolIntArray( 458765, 3, 0, 458772, 3, 0, 589832, 8, 0, 720896, 2, 0
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 73, 123 )
 player_name = "p1_"
-health = 10
-gauge = 20
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 328, 122 )
 player_name = "p2_"
-health = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -242,6 +239,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
 [connection signal="attack_hit" from="Player1" to="Player2" method="_on_Player1_attack_hit"]
 [connection signal="death" from="Player1" to="." method="_on_Player1_death"]
 [connection signal="death_animation_finished" from="Player1" to="." method="_on_Player1_death_animation_finished"]
@@ -252,3 +254,4 @@ __meta__ = {
 [connection signal="death_animation_finished" from="Player2" to="." method="_on_Player2_death_animation_finished"]
 [connection signal="gauge_changed" from="Player2" to="." method="_on_Player2_gauge_changed"]
 [connection signal="health_changed" from="Player2" to="." method="_on_Player2_health_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

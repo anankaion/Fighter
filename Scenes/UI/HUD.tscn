@@ -6,33 +6,38 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 1.0
-margin_left = -0.200001
-margin_top = 0.2
-margin_right = 0.200012
-margin_bottom = -185.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -32.0
+margin_right = 32.0
+margin_bottom = 58.0
 
-[node name="Player1Container" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 141.0
-margin_right = 171.0
+[node name="TimerLabel" type="Label" parent="VBoxContainer"]
+margin_right = 64.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "test"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 22.0
+margin_right = 64.0
+margin_bottom = 62.0
+alignment = 1
+
+[node name="Player1Container" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 30.0
 margin_bottom = 40.0
 
-[node name="Player1_Health" type="Label" parent="HBoxContainer/Player1Container"]
+[node name="Player1_Health" type="Label" parent="VBoxContainer/HBoxContainer/Player1Container"]
 margin_right = 30.0
 margin_bottom = 18.0
 custom_colors/font_color = Color( 0.368627, 0.866667, 0.247059, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Test"
 
-[node name="Player1_Gauge" type="Label" parent="HBoxContainer/Player1Container"]
+[node name="Player1_Gauge" type="Label" parent="VBoxContainer/HBoxContainer/Player1Container"]
 margin_top = 22.0
 margin_right = 30.0
 margin_bottom = 40.0
@@ -40,19 +45,19 @@ custom_colors/font_color = Color( 0.207843, 0.741176, 1, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Test"
 
-[node name="Player2Container" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 175.0
-margin_right = 205.0
+[node name="Player2Container" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
 margin_bottom = 40.0
 
-[node name="Player2_Health" type="Label" parent="HBoxContainer/Player2Container"]
+[node name="Player2_Health" type="Label" parent="VBoxContainer/HBoxContainer/Player2Container"]
 margin_right = 30.0
 margin_bottom = 18.0
 custom_colors/font_color = Color( 0.368627, 0.866667, 0.247059, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Test"
 
-[node name="Player2_Gauge" type="Label" parent="HBoxContainer/Player2Container"]
+[node name="Player2_Gauge" type="Label" parent="VBoxContainer/HBoxContainer/Player2Container"]
 margin_top = 22.0
 margin_right = 30.0
 margin_bottom = 40.0

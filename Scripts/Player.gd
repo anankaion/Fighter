@@ -94,6 +94,7 @@ func _physics_process(delta):
 		elif Input.is_action_pressed(player_name + "block"):
 			$AnimatedSprite.play("block")
 			damage_modifier = 0.1
+			velocity.x = 0
 		
 		# if no input
 		else:
